@@ -1,5 +1,18 @@
-import { IsString, IsNotEmpty, IsNumber, IsPositive } from 'class-validator';
+import {
+  IsArray,
+  IsEnum,
+  IsString,
+  IsNotEmpty,
+  IsNumber,
+  IsPositive,
+  ValidateNested,
+  IsDefined,
+} from 'class-validator';
+import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
+import PropertyType from 'src/property/domain/model/type.enum';
+import { AddressDto } from './address.dto';
+import AmenityEnum from 'src/property/domain/model/amenities.enum';
 
 export class CreatePropertyDto {
   @IsNumber()
@@ -12,23 +25,46 @@ export class CreatePropertyDto {
   @ApiProperty({ description: `property name` })
   readonly name: string;
 
-  @IsNotEmpty()
-  files: Express.Multer.File[];
-
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty({ description: `property address` })
-  readonly address: string;
-
+  @IsEnum(PropertyType, { each: true })
   @IsString()
   @IsNotEmpty()
   @ApiProperty({ description: `property type` })
   readonly propertyType: string;
 
-  @IsString()
+  @IsEnum(AmenityEnum, { each: true })
+  @IsArray()
   @IsNotEmpty()
-  @ApiProperty({ description: `property city` })
-  readonly city: string;
+  @ApiProperty({ description: `amenities` })
+  readonly amenities: AmenityEnum[];
+
+  @IsDefined()
+  @ValidateNested()
+  @Type(() => AddressDto)
+  address: AddressDto;
+
+  @IsNumber()
+  @IsNotEmpty()
+  @IsPositive()
+  @ApiProperty({ description: `capacity` })
+  readonly capacity: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  @IsPositive()
+  @ApiProperty({ description: `rooms` })
+  readonly rooms: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  @IsPositive()
+  @ApiProperty({ description: `beds` })
+  readonly beds: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  @IsPositive()
+  @ApiProperty({ description: `bathrooms` })
+  readonly bathrooms: number;
 
   @IsNumber()
   @IsNotEmpty()

@@ -1,5 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { IdentifiableEntitySchema } from '../../database/identifiable-entity.schema';
+// import { Amenity } from 'src/property/domain/model/amenities.model';
+import { AddressModelSchema } from './address.schema';
 
 @Schema({ collection: 'properties' })
 export class PropertyModelSchema extends IdentifiableEntitySchema {
@@ -10,13 +12,25 @@ export class PropertyModelSchema extends IdentifiableEntitySchema {
   name: string;
 
   @Prop({ required: true })
-  address: string;
-
-  @Prop({ required: true })
   propertyType: string;
 
   @Prop({ required: true })
-  city: string;
+  amenities: string[];
+
+  @Prop({ required: true })
+  address: AddressModelSchema;
+
+  @Prop({ required: true })
+  capacity: number;
+
+  @Prop({ required: true })
+  rooms: number;
+
+  @Prop({ required: true })
+  beds: number;
+
+  @Prop({ required: true })
+  bathrooms: number;
 
   @Prop({ required: true })
   pricePerNight: number;

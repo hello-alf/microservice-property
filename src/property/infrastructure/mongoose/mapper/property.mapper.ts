@@ -3,7 +3,9 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { Property } from '../../../domain/model/property.model';
+import { Address } from '../../../domain/model/address.model';
 import { PropertyModelSchema } from '../schemas/property.schema';
+import AmenityEnum from 'src/property/domain/model/amenities.enum';
 
 @Injectable()
 export class PropertyMapper {
@@ -13,12 +15,29 @@ export class PropertyMapper {
   ) {}
 
   public mapToDomain(propertyDocumentSchema: PropertyModelSchema): Property {
+    const newAddress = new Address(
+      propertyDocumentSchema.address.street,
+      propertyDocumentSchema.address.number,
+      propertyDocumentSchema.address.city,
+      propertyDocumentSchema.address.countryCode,
+      propertyDocumentSchema.address.latitude,
+      propertyDocumentSchema.address.longitude,
+    );
+
+    const amenities: AmenityEnum[] = propertyDocumentSchema.amenities.map(
+      (amenity: string) => AmenityEnum[amenity],
+    );
+
     return new Property(
       propertyDocumentSchema.id,
       propertyDocumentSchema.name,
-      propertyDocumentSchema.address,
       propertyDocumentSchema.propertyType,
-      propertyDocumentSchema.city,
+      amenities,
+      newAddress,
+      propertyDocumentSchema.capacity,
+      propertyDocumentSchema.rooms,
+      propertyDocumentSchema.beds,
+      propertyDocumentSchema.bathrooms,
       propertyDocumentSchema.pricePerNight,
     );
   }
@@ -29,7 +48,7 @@ export class PropertyMapper {
       name: propertyEntity.getName(),
       address: propertyEntity.getAddress(),
       propertyType: propertyEntity.getPropertyType(),
-      city: propertyEntity.getCity(),
+      // city: propertyEntity.getCity(),
       pricePerNight: propertyEntity.getPricePerNight(),
     });
     return propertySchema;

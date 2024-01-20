@@ -1,5 +1,3 @@
 import { CreatePropertyHandler } from './create-property.handler';
 
-export const CommandHandlers = [
-  CreatePropertyHandler,
-];
+export const CommandHandlers = [CreatePropertyHandler];
