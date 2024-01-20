@@ -1,0 +1,8 @@
+# .*
+!.env
+!.pylintrc
+node_modules
+Dockerfile
+mongo_data
+dist
+docker-compose.yml
