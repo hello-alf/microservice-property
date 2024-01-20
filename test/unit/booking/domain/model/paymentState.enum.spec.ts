@@ -1,4 +1,4 @@
-import { PaymentState } from '../../../../../src/booking/domain/model/paymentState.enum';
+import { PaymentState } from '../../../../../src/property/domain/model/paymentState.enum';
 
 describe('BookingState enum', () => {
   test('Verificar los valores del enum', () => {

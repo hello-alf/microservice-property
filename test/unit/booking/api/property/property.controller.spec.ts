@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { PropertyController } from '../../../../../src/booking/api/property/property.controller';
-import { CreatePropertyDto } from '../../../../../src/booking/application/dtos/property.dto';
-import { CreatePropertyCommand } from '../../../../../src/booking/application/commands/impl/create-property.command';
-import { GetPropertiesQuery } from '../../../../../src/booking/application/queries/impl/get-properties.query';
+import { PropertyController } from '../../../../../src/property/api/property/property.controller';
+import { CreatePropertyDto } from '../../../../../src/property/application/dtos/property.dto';
+import { CreatePropertyCommand } from '../../../../../src/property/application/commands/impl/create-property.command';
+import { GetPropertiesQuery } from '../../../../../src/property/application/queries/impl/get-properties.query';
 
 describe('BookingController', () => {
   let controller: PropertyController;

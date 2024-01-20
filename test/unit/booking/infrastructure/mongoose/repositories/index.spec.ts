@@ -1,11 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getModelToken } from '@nestjs/mongoose';
-import { Repositories } from '../../../../../../src/booking/infrastructure/mongoose/repositories/index';
-import { BookingRepository } from '../../../../../../src/booking/infrastructure/mongoose/repositories/booking.repository';
-import { PropertyRepository } from '../../../../../../src/booking/infrastructure/mongoose/repositories/property.repository';
-import { BookingModelSchema } from '../../../../../../src/booking/infrastructure/mongoose/schemas/booking.schema';
-import { PropertyModelSchema } from '../../../../../../src/booking/infrastructure/mongoose/schemas/property.schema';
-import { Mapper } from '../../../../../../src/booking/infrastructure/mongoose/mapper/index';
+import { Repositories } from '../../../../../../src/property/infrastructure/mongoose/repositories/index';
+import { BookingRepository } from '../../../../../../src/property/infrastructure/mongoose/repositories/booking.repository';
+import { PropertyRepository } from '../../../../../../src/property/infrastructure/mongoose/repositories/property.repository';
+import { BookingModelSchema } from '../../../../../../src/property/infrastructure/mongoose/schemas/booking.schema';
+import { PropertyModelSchema } from '../../../../../../src/property/infrastructure/mongoose/schemas/property.schema';
+import { Mapper } from '../../../../../../src/property/infrastructure/mongoose/mapper/index';
 
 describe('BookingRepository', () => {
   let bookingRepository: BookingRepository;

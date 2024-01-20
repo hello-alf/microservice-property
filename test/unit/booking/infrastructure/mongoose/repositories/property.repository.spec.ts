@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getModelToken } from '@nestjs/mongoose';
-import { PropertyRepository } from '../../../../../../src/booking/infrastructure/mongoose/repositories/property.repository';
-import { PropertyModelSchema } from '../../../../../../src/booking/infrastructure/mongoose/schemas/property.schema';
-import { PropertyMapper } from '../../../../../../src/booking/infrastructure/mongoose/mapper/property.mapper';
+import { PropertyRepository } from '../../../../../../src/property/infrastructure/mongoose/repositories/property.repository';
+import { PropertyModelSchema } from '../../../../../../src/property/infrastructure/mongoose/schemas/property.schema';
+import { PropertyMapper } from '../../../../../../src/property/infrastructure/mongoose/mapper/property.mapper';
 
 describe('PropertyRepository', () => {
   let propertyRepository: PropertyRepository;

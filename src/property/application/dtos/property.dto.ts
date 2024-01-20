@@ -12,6 +12,9 @@ export class CreatePropertyDto {
   @ApiProperty({ description: `property name` })
   readonly name: string;
 
+  @IsNotEmpty()
+  files: Express.Multer.File[];
+
   @IsString()
   @IsNotEmpty()
   @ApiProperty({ description: `property address` })

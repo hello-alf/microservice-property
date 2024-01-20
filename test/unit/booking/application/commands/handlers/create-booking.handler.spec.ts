@@ -1,11 +1,11 @@
 import { EventPublisher } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 import { BadRequestException } from '@nestjs/common';
-import { CreateBookingHandler } from '../../../../../../src/booking/application/commands/handlers/create-booking.handler';
-import { CreateBookingCommand } from '../../../../../../src/booking/application/commands/impl/create-booking.command';
-import { BookingRepository } from '../../../../../../src/booking/infrastructure/mongoose/repositories/booking.repository';
-import { PropertyRepository } from '../../../../../../src/booking/infrastructure/mongoose/repositories/property.repository';
-import { BookingFactory } from '../../../../../../src/booking/domain/factories/booking.factory';
+import { CreateBookingHandler } from '../../../../../../src/property/application/commands/handlers/create-booking.handler';
+import { CreateBookingCommand } from '../../../../../../src/property/application/commands/impl/create-booking.command';
+import { BookingRepository } from '../../../../../../src/property/infrastructure/mongoose/repositories/booking.repository';
+import { PropertyRepository } from '../../../../../../src/property/infrastructure/mongoose/repositories/property.repository';
+import { BookingFactory } from '../../../../../../src/property/domain/factories/booking.factory';
 import { CreateBookingDto } from 'src/booking/application/dtos/booking.dto';
 
 describe('CreateBookingHandler', () => {

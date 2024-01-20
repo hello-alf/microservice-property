@@ -1,11 +1,11 @@
 import { BadRequestException } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { CreatePropertyHandler } from '../../../../../../src/booking/application/commands/handlers/create-property.handler';
-import { CreatePropertyCommand } from '../../../../../../src/booking/application/commands/impl/create-property.command';
-import { PropertyRepository } from '../../../../../../src/booking/infrastructure/mongoose/repositories/property.repository';
-import { PropertyFactory } from '../../../../../../src/booking/domain/factories/property.factory';
-import { CreatePropertyDto } from '../../../../../../src/booking/application/dtos/property.dto';
+import { CreatePropertyHandler } from '../../../../../../src/property/application/commands/handlers/create-property.handler';
+import { CreatePropertyCommand } from '../../../../../../src/property/application/commands/impl/create-property.command';
+import { PropertyRepository } from '../../../../../../src/property/infrastructure/mongoose/repositories/property.repository';
+import { PropertyFactory } from '../../../../../../src/property/domain/factories/property.factory';
+import { CreatePropertyDto } from '../../../../../../src/property/application/dtos/property.dto';
 
 describe('CreatePropertyHandler', () => {
   let createPropertyHandler: CreatePropertyHandler;

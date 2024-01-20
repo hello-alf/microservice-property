@@ -1,9 +1,9 @@
 import { BadRequestException } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { CompleteBookingPaymentHandler } from '../../../../../../src/booking/application/commands/handlers/complete-booking-payment.handler';
-import { CompleteBookingPaymentCommand } from '../../../../../../src/booking/application/commands/impl/complete-booking-payment.command';
-import { BookingRepository } from '../../../../../../src/booking/infrastructure/mongoose/repositories/booking.repository';
+import { CompleteBookingPaymentHandler } from '../../../../../../src/property/application/commands/handlers/complete-booking-payment.handler';
+import { CompleteBookingPaymentCommand } from '../../../../../../src/property/application/commands/impl/complete-booking-payment.command';
+import { BookingRepository } from '../../../../../../src/property/infrastructure/mongoose/repositories/booking.repository';
 
 describe('CancelBookingHandler', () => {
   let completeBookingHandler: CompleteBookingPaymentHandler;

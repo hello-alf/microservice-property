@@ -1,4 +1,4 @@
-import { Guest } from '../../../../../src/booking/domain/model/guest.model';
+import { Guest } from '../../../../../src/property/domain/model/guest.model';
 
 describe('Guest', () => {
   test('Crear objeto tipo Guest', () => {

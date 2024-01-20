@@ -1,4 +1,4 @@
-import { Check } from '../../../../../src/booking/domain/valueObjects/check.valueObject';
+import { Check } from '../../../../../src/property/domain/valueObjects/check.valueObject';
 
 describe('Check ValueObject', () => {
   test('Validacion de 1 dia a partir de hoy', () => {

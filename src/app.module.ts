@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
 import { SharedKernelModule } from './shared-kernel/shared-kernel.module';
-import { BookingModule } from './booking/booking.module';
-import { MongooseConfigModule } from './booking/infrastructure/mongoose/mongoose.module';
-import config from './booking/infrastructure/config';
+import { PropertyModule } from './property/property.module';
+import { MongooseConfigModule } from './property/infrastructure/mongoose/mongoose.module';
+import config from './property/infrastructure/config';
 import { environments } from './environments';
 
 @Module({
@@ -15,7 +15,7 @@ import { environments } from './environments';
       isGlobal: true,
     }),
     SharedKernelModule,
-    BookingModule,
+    PropertyModule,
     MongooseConfigModule,
   ],
 })

@@ -1,4 +1,4 @@
-import { CheckInEvent } from '../../../../../src/booking/domain/events/checkInEvent';
+import { CheckInEvent } from '../../../../../src/property/domain/events/checkInEvent';
 
 describe('CheckInEvent', () => {
   it('Crear instancia', () => {

@@ -1,4 +1,4 @@
-import { BookingError } from '../../../../../src/booking/domain/errors/bookingError';
+import { BookingError } from '../../../../../src/property/domain/errors/bookingError';
 
 describe('BookingError enum', () => {
   it('should have the expected enum values', () => {

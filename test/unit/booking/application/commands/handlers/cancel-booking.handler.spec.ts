@@ -1,9 +1,9 @@
 import { BadRequestException } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { CancelBookingHandler } from '../../../../../../src/booking/application/commands/handlers/cancel-booking.handler';
-import { CancelBookingCommand } from '../../../../../../src/booking/application/commands/impl/cancel-booking.command';
-import { BookingRepository } from '../../../../../../src/booking/infrastructure/mongoose/repositories/booking.repository';
+import { CancelBookingHandler } from '../../../../../../src/property/application/commands/handlers/cancel-booking.handler';
+import { CancelBookingCommand } from '../../../../../../src/property/application/commands/impl/cancel-booking.command';
+import { BookingRepository } from '../../../../../../src/property/infrastructure/mongoose/repositories/booking.repository';
 
 describe('CancelBookingHandler', () => {
   let cancelBookingHandler: CancelBookingHandler;

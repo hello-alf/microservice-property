@@ -1,12 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { BookingController } from '../../../../../src/booking/api/booking/booking.controller';
-import { CreateBookingDto } from '../../../../../src/booking/application/dtos/booking.dto';
-import { CreateBookingCommand } from '../../../../../src/booking/application/commands/impl/create-booking.command';
-import { ConfirmBookingCommand } from '../../../../../src/booking/application/commands/impl/confirm-booking.command';
-import { CancelBookingCommand } from '../../../../../src/booking/application/commands/impl/cancel-booking.command';
-import { CompleteBookingPaymentCommand } from '../../../../../src/booking/application/commands/impl/complete-booking-payment.command';
-import { GetBookingsQuery } from '../../../../../src/booking/application/queries/impl/get-bookings.query';
+import { BookingController } from '../../../../../src/property/api/booking/booking.controller';
+import { CreateBookingDto } from '../../../../../src/property/application/dtos/booking.dto';
+import { CreateBookingCommand } from '../../../../../src/property/application/commands/impl/create-booking.command';
+import { ConfirmBookingCommand } from '../../../../../src/property/application/commands/impl/confirm-booking.command';
+import { CancelBookingCommand } from '../../../../../src/property/application/commands/impl/cancel-booking.command';
+import { CompleteBookingPaymentCommand } from '../../../../../src/property/application/commands/impl/complete-booking-payment.command';
+import { GetBookingsQuery } from '../../../../../src/property/application/queries/impl/get-bookings.query';
 
 describe('BookingController', () => {
   let controller: BookingController;

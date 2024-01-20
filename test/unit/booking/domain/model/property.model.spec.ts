@@ -1,4 +1,4 @@
-import { Property } from '../../../../../src/booking/domain/model/property.model';
+import { Property } from '../../../../../src/property/domain/model/property.model';
 import { PositiveValue } from '../../../../../src/shared-kernel/valueObjects/positiveValue';
 
 describe('Property', () => {

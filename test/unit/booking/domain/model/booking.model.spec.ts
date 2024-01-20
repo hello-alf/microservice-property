@@ -1,4 +1,4 @@
-import { Booking } from '../../../../../src/booking/domain/model/booking.model';
+import { Booking } from '../../../../../src/property/domain/model/booking.model';
 
 describe('Booking', () => {
   test('Crear objeto tipo Booking', () => {

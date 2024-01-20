@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getModelToken } from '@nestjs/mongoose';
-import { BookingRepository } from '../../../../../../src/booking/infrastructure/mongoose/repositories/booking.repository';
-import { BookingModelSchema } from '../../../../../../src/booking/infrastructure/mongoose/schemas/booking.schema';
-import { BookingMapper } from '../../../../../../src/booking/infrastructure/mongoose/mapper/booking.mapper';
+import { BookingRepository } from '../../../../../../src/property/infrastructure/mongoose/repositories/booking.repository';
+import { BookingModelSchema } from '../../../../../../src/property/infrastructure/mongoose/schemas/booking.schema';
+import { BookingMapper } from '../../../../../../src/property/infrastructure/mongoose/mapper/booking.mapper';
 
 describe('BookingRepository', () => {
   let bookingRepository: BookingRepository;

@@ -1,4 +1,4 @@
-import { BookingState } from '../../../../../src/booking/domain/valueObjects/bookingState.valueObject';
+import { BookingState } from '../../../../../src/property/domain/valueObjects/bookingState.valueObject';
 
 describe('BookingState ValueObject', () => {
   test('BookingState creacion de objeto', () => {
