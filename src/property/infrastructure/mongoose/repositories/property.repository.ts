@@ -48,6 +48,9 @@ export class PropertyRepository implements iPropertyRepository {
   };
 
   findAll = (): Promise<PropertyModelSchema[]> => {
-    return this.propertyModel.find().exec();
+    return this.propertyModel
+      .find()
+      .select({ _id: 1, name: 1, pricePerNight: 1, address: 1 })
+      .exec();
   };
 }
