@@ -6,6 +6,7 @@ import { Address } from './address.model';
 export class Property extends AggregateRoot {
   private id: string;
   private name: string;
+  private description: string;
   private address: Address;
   private propertyType: string;
   private pricePerNight: PositiveValue;
@@ -18,6 +19,7 @@ export class Property extends AggregateRoot {
   constructor(
     id: string,
     name: string,
+    description: string,
     propertyType: string,
     amenities: AmenityEnum[],
     address: Address,
@@ -30,6 +32,7 @@ export class Property extends AggregateRoot {
     super();
     this.id = id;
     this.name = name;
+    this.description = description;
     this.address = address;
     this.propertyType = propertyType;
     this.amenities = amenities;
@@ -54,6 +57,14 @@ export class Property extends AggregateRoot {
 
   public setName(value: string) {
     this.name = value;
+  }
+
+  public getDescription(): string {
+    return this.description;
+  }
+
+  public setDescription(value: string) {
+    this.description = value;
   }
 
   public getPropertyType(): string {

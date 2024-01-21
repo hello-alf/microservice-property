@@ -34,6 +34,7 @@ export class CreatePropertyHandler
       const propertyObject = this.propertyFactory.createProperty(
         '',
         createPropertyRequest.name,
+        createPropertyRequest.description,
         createPropertyRequest.propertyType,
         createPropertyRequest.amenities,
         customAddress,

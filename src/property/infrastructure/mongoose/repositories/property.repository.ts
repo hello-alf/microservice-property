@@ -20,6 +20,7 @@ export class PropertyRepository implements iPropertyRepository {
     const newProperty = new this.propertyModel({
       _id: new ObjectId(),
       name: property.getName(),
+      description: property.getDescription(),
       address: {
         street: property.getAddress().getStreet(),
         number: property.getAddress().getNumber(),
@@ -50,7 +51,16 @@ export class PropertyRepository implements iPropertyRepository {
   findAll = (): Promise<PropertyModelSchema[]> => {
     return this.propertyModel
       .find()
-      .select({ _id: 1, name: 1, pricePerNight: 1, address: 1 })
+      .select({
+        _id: 1,
+        name: 1,
+        description: 1,
+        pricePerNight: 1,
+        'address.street': 1,
+        'address.number': 1,
+        'address.city': 1,
+        'address.countryCode': 1,
+      })
       .exec();
   };
 }

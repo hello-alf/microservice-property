@@ -31,6 +31,7 @@ export class PropertyMapper {
     return new Property(
       propertyDocumentSchema._id.toString(),
       propertyDocumentSchema.name,
+      propertyDocumentSchema.description,
       propertyDocumentSchema.propertyType,
       amenities,
       newAddress,

@@ -6,6 +6,7 @@ export interface iProperty {
   createProperty(
     id: string,
     name: string,
+    description: string,
     propertyType: PropertyTypeEnum,
     amenities: AmenityEnum[],
     address: Address,

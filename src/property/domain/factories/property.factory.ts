@@ -9,6 +9,7 @@ export class PropertyFactory implements iProperty {
   createProperty(
     id: string,
     name: string,
+    description: string,
     propertyType: string,
     amenities: AmenityEnum[],
     address: Address,
@@ -21,6 +22,7 @@ export class PropertyFactory implements iProperty {
     return new Property(
       id,
       name,
+      description,
       propertyType,
       amenities,
       address,

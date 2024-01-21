@@ -8,6 +8,9 @@ export class PropertyModelSchema extends IdentifiableEntitySchema {
   name: string;
 
   @Prop({ required: true })
+  description: string;
+
+  @Prop({ required: true })
   propertyType: string;
 
   @Prop({ required: true })

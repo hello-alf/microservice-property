@@ -20,6 +20,11 @@ export class CreatePropertyDto {
   @ApiProperty({ description: `property name` })
   readonly name: string;
 
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty({ description: `property description` })
+  readonly description: string;
+
   @IsEnum(PropertyType, { each: true })
   @IsString()
   @IsNotEmpty()
