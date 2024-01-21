@@ -7,6 +7,6 @@ export class GetPropertiesHandler implements IQueryHandler<GetPropertiesQuery> {
   constructor(private readonly repository: PropertyRepository) {}
 
   async execute(query: GetPropertiesQuery) {
-    return this.repository.findAll();
+    return this.repository.findAll(query.filter);
   }
 }

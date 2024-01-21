@@ -66,9 +66,23 @@ export class PropertyRepository implements iPropertyRepository {
     return this.propertyModel.findById(objectId).exec();
   };
 
-  findAll = (): Promise<PropertyModelSchema[]> => {
+  findAll = (criteria?: any): Promise<PropertyModelSchema[]> => {
+    let filter = {};
+
+    if (criteria !== undefined) {
+      const query = new RegExp(criteria, 'i');
+      filter = {
+        $or: [
+          { name: query },
+          { description: query },
+          { 'address.street': query },
+          { 'address.city': query },
+        ],
+      };
+    }
+
     return this.propertyModel
-      .find()
+      .find(filter)
       .select({
         _id: 1,
         name: 1,

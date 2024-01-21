@@ -5,12 +5,8 @@ import {
   Get,
   Param,
   UseInterceptors,
-  UploadedFile,
-  Bind,
   UploadedFiles,
-  ParseFilePipe,
-  MaxFileSizeValidator,
-  FileTypeValidator,
+  Query,
 } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiTags } from '@nestjs/swagger';
@@ -30,8 +26,8 @@ export class PropertyController {
   ) {}
 
   @Get('/')
-  findAll() {
-    return this.queryBus.execute(new GetPropertiesQuery());
+  findAll(@Query() query) {
+    return this.queryBus.execute(new GetPropertiesQuery(query?.filter));
   }
 
   @Post('/')
