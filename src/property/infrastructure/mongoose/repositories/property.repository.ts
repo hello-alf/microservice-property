@@ -81,4 +81,19 @@ export class PropertyRepository implements iPropertyRepository {
       })
       .exec();
   };
+
+  findOneAndUpdate = async (id: string, payload: any): Promise<Property> => {
+    const objectId = new ObjectId(id);
+
+    console.log('objectId', objectId);
+    console.log('payload', payload);
+
+    const property = await this.propertyModel
+      .findOneAndUpdate({ _id: objectId }, { $set: payload }, { new: true })
+      .exec();
+
+    console.log('grabado', property);
+
+    return this.propertyMapper.mapToDomain(property);
+  };
 }

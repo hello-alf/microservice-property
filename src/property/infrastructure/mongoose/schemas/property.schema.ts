@@ -33,6 +33,9 @@ export class PropertyModelSchema extends IdentifiableEntitySchema {
 
   @Prop({ required: true })
   pricePerNight: number;
+
+  @Prop({ required: false })
+  urls: string;
 }
 
 export const PropertySchema = SchemaFactory.createForClass(PropertyModelSchema);

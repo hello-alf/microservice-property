@@ -4,8 +4,6 @@ import { BadRequestException } from '@nestjs/common';
 import { UploadPhotoCommand } from '../impl/upload-property.command';
 import { PropertyRepository } from '../../../infrastructure/mongoose/repositories/property.repository';
 import { S3Service } from '../../../infrastructure/cdn/s3.service';
-import { PropertyFactory } from '../../../domain/factories/property.factory';
-import { Address } from '../../../domain/model/address.model';
 
 @CommandHandler(UploadPhotoCommand)
 export class UploadPhotoHandler implements ICommandHandler<UploadPhotoCommand> {
@@ -13,7 +11,6 @@ export class UploadPhotoHandler implements ICommandHandler<UploadPhotoCommand> {
     private readonly propertyRepository: PropertyRepository,
     private readonly cdnService: S3Service,
     private readonly publisher: EventPublisher,
-    private readonly propertyFactory: PropertyFactory,
   ) {}
 
   async execute(command: UploadPhotoCommand) {
@@ -27,7 +24,9 @@ export class UploadPhotoHandler implements ICommandHandler<UploadPhotoCommand> {
 
       const url = await this.cdnService.uploadFile(file);
 
-      console.log('url', url['Location']);
+      await this.propertyRepository.findOneAndUpdate(id, {
+        urls: url['Location'],
+      });
 
       property.commit();
 
