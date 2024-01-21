@@ -7,7 +7,7 @@ import { Address } from '../model/address.model';
 @Injectable()
 export class PropertyFactory implements iProperty {
   createProperty(
-    id: number,
+    id: string,
     name: string,
     propertyType: string,
     amenities: AmenityEnum[],

@@ -1,13 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { IdentifiableEntitySchema } from '../../database/identifiable-entity.schema';
-// import { Amenity } from 'src/property/domain/model/amenities.model';
 import { AddressModelSchema } from './address.schema';
 
 @Schema({ collection: 'properties' })
 export class PropertyModelSchema extends IdentifiableEntitySchema {
-  @Prop({ required: true })
-  id: number;
-
   @Prop({ required: true })
   name: string;
 

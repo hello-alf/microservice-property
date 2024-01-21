@@ -4,7 +4,7 @@ import { Address } from '../model/address.model';
 
 export interface iProperty {
   createProperty(
-    id: number,
+    id: string,
     name: string,
     propertyType: PropertyTypeEnum,
     amenities: AmenityEnum[],

@@ -32,7 +32,7 @@ export class CreatePropertyHandler
       );
 
       const propertyObject = this.propertyFactory.createProperty(
-        createPropertyRequest.id,
+        '',
         createPropertyRequest.name,
         createPropertyRequest.propertyType,
         createPropertyRequest.amenities,

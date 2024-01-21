@@ -15,11 +15,6 @@ import { AddressDto } from './address.dto';
 import AmenityEnum from 'src/property/domain/model/amenities.enum';
 
 export class CreatePropertyDto {
-  @IsNumber()
-  @IsNotEmpty()
-  @ApiProperty({ description: `identifier` })
-  readonly id: number;
-
   @IsString()
   @IsNotEmpty()
   @ApiProperty({ description: `property name` })

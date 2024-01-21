@@ -29,7 +29,7 @@ export class PropertyMapper {
     );
 
     return new Property(
-      propertyDocumentSchema.id,
+      propertyDocumentSchema._id.toString(),
       propertyDocumentSchema.name,
       propertyDocumentSchema.propertyType,
       amenities,
