@@ -25,6 +25,8 @@ async function bootstrap() {
     swaggerOptions: { filter: true },
   });
 
+  app.enableCors();
+
   await app.listen(3000);
 }
 bootstrap();
