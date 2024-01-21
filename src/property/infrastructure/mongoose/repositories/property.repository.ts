@@ -74,6 +74,7 @@ export class PropertyRepository implements iPropertyRepository {
         name: 1,
         description: 1,
         pricePerNight: 1,
+        urls: 1,
         'address.street': 1,
         'address.number': 1,
         'address.city': 1,
