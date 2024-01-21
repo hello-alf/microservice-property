@@ -26,6 +26,25 @@ export class S3Service {
     );
   }
 
+  async uploadFiles(id: string, files: Express.Multer.File[]) {
+    const promises = files.map((file) =>
+      this.s3_upload(
+        file.buffer,
+        process.env.AWS_BUCKET_NAME,
+        `${id}/${this.generateRandomFileName(file)}`,
+        file.mimetype,
+      ),
+    );
+
+    try {
+      const s3Responses = await Promise.all(promises);
+      return s3Responses.map((s3Response) => s3Response.Location);
+    } catch (e) {
+      console.log(e);
+      throw new Error('Error uploading files to S3');
+    }
+  }
+
   async s3_upload(file, bucket, name, mimetype) {
     const params = {
       Bucket: bucket,

@@ -16,16 +16,16 @@ export class UploadPhotoHandler implements ICommandHandler<UploadPhotoCommand> {
   async execute(command: UploadPhotoCommand) {
     try {
       console.log('command', command);
-      const { file, id } = command;
+      const { files, id } = command;
 
       const property = this.publisher.mergeObjectContext(
         await this.propertyRepository.findByIdModel(id),
       );
 
-      const url = await this.cdnService.uploadFile(file);
+      const urls = await this.cdnService.uploadFiles(id, files);
 
       await this.propertyRepository.findOneAndUpdate(id, {
-        urls: url['Location'],
+        urls: urls,
       });
 
       property.commit();

@@ -19,7 +19,7 @@ import { CreatePropertyCommand } from '../../application/commands/impl/create-pr
 import { UploadPhotoCommand } from '../../application/commands/impl/upload-property.command';
 import { GetPropertiesQuery } from '../../application/queries/impl/get-properties.query';
 import { GetPropertyQuery } from '../../application/queries/impl/get-property.query';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { AnyFilesInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('property')
 @Controller('property')
@@ -40,9 +40,12 @@ export class PropertyController {
   }
 
   @Post('/upload-photo/:id')
-  @UseInterceptors(FileInterceptor('file'))
-  addPhoto(@UploadedFile() file, @Param('id') id: string) {
-    return this.commandBus.execute(new UploadPhotoCommand(file, id));
+  @UseInterceptors(AnyFilesInterceptor())
+  addPhoto(
+    @UploadedFiles() files: Array<Express.Multer.File>,
+    @Param('id') id: string,
+  ) {
+    return this.commandBus.execute(new UploadPhotoCommand(files, id));
   }
 
   @Get('/:id')

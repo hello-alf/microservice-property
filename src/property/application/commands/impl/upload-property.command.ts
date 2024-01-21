@@ -1,6 +1,6 @@
 export class UploadPhotoCommand {
   constructor(
-    public readonly file: Express.Multer.File,
+    public readonly files: Express.Multer.File[],
     public readonly id: string,
   ) {}
 }
