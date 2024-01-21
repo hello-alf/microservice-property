@@ -33,4 +33,8 @@ export class PropertyFactory implements iProperty {
       pricePerNight,
     );
   }
+
+  uploadPhoto() {
+    return 'uploadPhoto';
+  }
 }

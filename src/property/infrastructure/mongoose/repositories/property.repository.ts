@@ -43,6 +43,24 @@ export class PropertyRepository implements iPropertyRepository {
     return this.propertyMapper.mapToDomain(newProperty);
   };
 
+  addPhoto = (id: string): Promise<PropertyModelSchema> => {
+    const objectId = new ObjectId(id);
+    const actualPoperty = this.propertyModel.findById(objectId).exec();
+
+    console.log('actualPoperty', actualPoperty);
+
+    console.log('adicionar foto al id: ', id);
+
+    return actualPoperty;
+  };
+
+  findByIdModel = async (id: string): Promise<Property> => {
+    const objectId = new ObjectId(id);
+    const property = await this.propertyModel.findById(objectId).exec();
+
+    return this.propertyMapper.mapToDomain(property);
+  };
+
   findById = (id: string): Promise<PropertyModelSchema> => {
     const objectId = new ObjectId(id);
     return this.propertyModel.findById(objectId).exec();

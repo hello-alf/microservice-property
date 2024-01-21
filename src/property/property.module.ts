@@ -10,6 +10,7 @@ import {
   PropertyModelSchema,
   PropertySchema,
 } from './infrastructure/mongoose/schemas/property.schema';
+import { S3Service } from './infrastructure/cdn/s3.service';
 
 import { Mapper } from './infrastructure/mongoose/mapper';
 import { CommandHandlers } from './application/commands/handlers';
@@ -47,6 +48,7 @@ import { Factories } from './domain/factories';
     ...QueryHandlers,
     ...Mapper,
     ...Factories,
+    S3Service,
   ],
 })
 export class PropertyModule {}

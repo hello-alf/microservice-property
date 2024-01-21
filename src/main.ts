@@ -2,7 +2,6 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import * as multer from 'multer';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -25,8 +24,6 @@ async function bootstrap() {
   SwaggerModule.setup('/api/docs', app, document, {
     swaggerOptions: { filter: true },
   });
-
-  app.use(multer({ dest: './uploads/' }).any());
 
   await app.listen(3000);
 }
