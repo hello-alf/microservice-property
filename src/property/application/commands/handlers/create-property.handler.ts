@@ -6,6 +6,7 @@ import { CreatePropertyCommand } from '../impl/create-property.command';
 import { PropertyRepository } from '../../../infrastructure/mongoose/repositories/property.repository';
 import { PropertyFactory } from '../../../domain/factories/property.factory';
 import { Address } from '../../../domain/model/address.model';
+import { HostRepository } from 'src/property/infrastructure/mongoose/repositories/host.repository';
 
 @CommandHandler(CreatePropertyCommand)
 export class CreatePropertyHandler
@@ -13,6 +14,7 @@ export class CreatePropertyHandler
 {
   constructor(
     private readonly propertyRepository: PropertyRepository,
+    private readonly hostRepository: HostRepository,
     private readonly publisher: EventPublisher,
     private readonly propertyFactory: PropertyFactory,
     private readonly amqpConnection: AmqpConnection,
@@ -31,6 +33,10 @@ export class CreatePropertyHandler
         createPropertyRequest.address.longitude,
       );
 
+      const actualHost = await this.hostRepository.findById(
+        createPropertyRequest.host,
+      );
+
       const propertyObject = this.propertyFactory.createProperty(
         '',
         createPropertyRequest.name,
@@ -43,19 +49,20 @@ export class CreatePropertyHandler
         createPropertyRequest.beds,
         createPropertyRequest.bathrooms,
         createPropertyRequest.pricePerNight,
+        actualHost,
       );
 
       const property = this.publisher.mergeObjectContext(
-        this.propertyRepository.save(propertyObject),
+        this.propertyRepository.save(propertyObject, actualHost),
       );
 
       property.commit();
 
-      await this.amqpConnection.publish(
-        'property-service:property-created',
-        '',
-        property,
-      );
+      // await this.amqpConnection.publish(
+      //   'property-service:property-created',
+      //   '',
+      //   property,
+      // );
 
       return property;
     } catch (error) {

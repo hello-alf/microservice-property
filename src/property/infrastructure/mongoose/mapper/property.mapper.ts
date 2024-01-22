@@ -6,15 +6,22 @@ import { Property } from '../../../domain/model/property.model';
 import { Address } from '../../../domain/model/address.model';
 import { PropertyModelSchema } from '../schemas/property.schema';
 import AmenityEnum from 'src/property/domain/model/amenities.enum';
+import { HostModelSchema } from '../schemas/host.schema';
+import { Host } from 'src/property/domain/model/host.model';
 
 @Injectable()
 export class PropertyMapper {
   constructor(
     @InjectModel(PropertyModelSchema.name)
     private bookingModel: Model<PropertyModelSchema>,
+    @InjectModel(HostModelSchema.name)
+    private hostModel: Model<HostModelSchema>,
   ) {}
 
-  public mapToDomain(propertyDocumentSchema: PropertyModelSchema): Property {
+  public mapToDomain(
+    propertyDocumentSchema: PropertyModelSchema,
+    hostDocumentSchema: HostModelSchema,
+  ): Property {
     const newAddress = new Address(
       propertyDocumentSchema.address.street,
       propertyDocumentSchema.address.number,
@@ -26,6 +33,15 @@ export class PropertyMapper {
 
     const amenities: AmenityEnum[] = propertyDocumentSchema.amenities.map(
       (amenity: string) => AmenityEnum[amenity],
+    );
+
+    const actualHost = new Host(
+      hostDocumentSchema._id.toString(),
+      hostDocumentSchema.name,
+      hostDocumentSchema.lastname,
+      hostDocumentSchema.city,
+      hostDocumentSchema.country,
+      hostDocumentSchema.email,
     );
 
     return new Property(
@@ -40,6 +56,7 @@ export class PropertyMapper {
       propertyDocumentSchema.beds,
       propertyDocumentSchema.bathrooms,
       propertyDocumentSchema.pricePerNight,
+      actualHost,
     );
   }
 

@@ -15,7 +15,6 @@ export class UploadPhotoHandler implements ICommandHandler<UploadPhotoCommand> {
 
   async execute(command: UploadPhotoCommand) {
     try {
-      console.log('command', command);
       const { files, id } = command;
 
       const property = this.publisher.mergeObjectContext(

@@ -1,6 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { IdentifiableEntitySchema } from '../../database/identifiable-entity.schema';
 import { AddressModelSchema } from './address.schema';
+import { Types } from 'mongoose';
+import { HostModelSchema } from './host.schema';
 
 @Schema({ collection: 'properties' })
 export class PropertyModelSchema extends IdentifiableEntitySchema {
@@ -36,6 +38,9 @@ export class PropertyModelSchema extends IdentifiableEntitySchema {
 
   @Prop({ required: false })
   urls: string[];
+
+  @Prop({ type: Types.ObjectId, ref: HostModelSchema.name })
+  host: HostModelSchema;
 }
 
 export const PropertySchema = SchemaFactory.createForClass(PropertyModelSchema);

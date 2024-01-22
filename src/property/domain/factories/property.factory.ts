@@ -3,6 +3,7 @@ import { iProperty } from './iProperty';
 import { Property } from '../model/property.model';
 import AmenityEnum from '../model/amenities.enum';
 import { Address } from '../model/address.model';
+import { Host } from '../model/host.model';
 
 @Injectable()
 export class PropertyFactory implements iProperty {
@@ -18,6 +19,7 @@ export class PropertyFactory implements iProperty {
     beds: number,
     bathrooms: number,
     pricePerNight: number,
+    host: Host,
   ) {
     return new Property(
       id,
@@ -31,6 +33,7 @@ export class PropertyFactory implements iProperty {
       beds,
       bathrooms,
       pricePerNight,
+      host,
     );
   }
 

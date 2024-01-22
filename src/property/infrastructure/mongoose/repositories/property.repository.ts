@@ -7,6 +7,8 @@ import { PropertyModelSchema } from '../schemas/property.schema';
 import { iPropertyRepository } from '../../../domain/repositories/iProperty';
 import { Property } from '../../../domain/model/property.model';
 import { PropertyMapper } from '../mapper/property.mapper';
+import { Host } from '../../../domain/model/host.model';
+import { HostModelSchema } from '../schemas/host.schema';
 
 @Injectable()
 export class PropertyRepository implements iPropertyRepository {
@@ -14,9 +16,11 @@ export class PropertyRepository implements iPropertyRepository {
     @InjectModel(PropertyModelSchema.name)
     private readonly propertyModel: Model<PropertyModelSchema>,
     private readonly propertyMapper: PropertyMapper,
+    @InjectModel(HostModelSchema.name)
+    private readonly hostModel: Model<HostModelSchema>,
   ) {}
 
-  save = (property: Property): Property => {
+  save = (property: Property, host: Host): Property => {
     const newProperty = new this.propertyModel({
       _id: new ObjectId(),
       name: property.getName(),
@@ -40,7 +44,16 @@ export class PropertyRepository implements iPropertyRepository {
 
     newProperty.save();
 
-    return this.propertyMapper.mapToDomain(newProperty);
+    const newHost = new this.hostModel({
+      _id: new ObjectId(host.getId()),
+      name: host.getName(),
+      lastname: host.getLastname(),
+      city: host.getCity(),
+      country: host.getCountry(),
+      email: host.getEmail(),
+    });
+
+    return this.propertyMapper.mapToDomain(newProperty, newHost);
   };
 
   addPhoto = (id: string): Promise<PropertyModelSchema> => {
@@ -58,7 +71,10 @@ export class PropertyRepository implements iPropertyRepository {
     const objectId = new ObjectId(id);
     const property = await this.propertyModel.findById(objectId).exec();
 
-    return this.propertyMapper.mapToDomain(property);
+    const objectHostId = new ObjectId(property.host._id);
+    const host = await this.hostModel.findById(objectHostId).exec();
+
+    return this.propertyMapper.mapToDomain(property, host);
   };
 
   findById = (id: string): Promise<PropertyModelSchema> => {
@@ -107,8 +123,9 @@ export class PropertyRepository implements iPropertyRepository {
       .findOneAndUpdate({ _id: objectId }, { $set: payload }, { new: true })
       .exec();
 
-    console.log('grabado', property);
+    const objectHostId = new ObjectId(property.host._id);
+    const host = await this.hostModel.findById(objectHostId).exec();
 
-    return this.propertyMapper.mapToDomain(property);
+    return this.propertyMapper.mapToDomain(property, host);
   };
 }

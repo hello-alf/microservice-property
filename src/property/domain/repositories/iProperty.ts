@@ -1,5 +1,5 @@
 export interface iPropertyRepository {
-  save: (property: any) => any;
+  save: (property: any, host: any) => any;
 
   findById: (id: string) => Promise<any | null>;
 

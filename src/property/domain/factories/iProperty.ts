@@ -1,6 +1,7 @@
 import AmenityEnum from '../model/amenities.enum';
 import PropertyTypeEnum from '../model/type.enum';
 import { Address } from '../model/address.model';
+import { Host } from '../model/host.model';
 
 export interface iProperty {
   createProperty(
@@ -15,5 +16,6 @@ export interface iProperty {
     beds: number,
     bathrooms: number,
     pricePerNight: number,
+    host: Host,
   );
 }

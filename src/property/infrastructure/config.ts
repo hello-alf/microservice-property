@@ -3,7 +3,7 @@ import { registerAs } from '@nestjs/config';
 export default registerAs('config', () => {
   return {
     mongo: {
-      dbName: process.env.MONGO_DB || 'propertyDB',
+      dbName: process.env.MONGO_DB || 'NUR-PROPERTIES-DB',
       user: process.env.MONGO_INITDB_ROOT_USERNAME || '',
       password: process.env.MONGO_INITDB_ROOT_PASSWORD || '',
       port: parseInt(process.env.MONGO_PORT, 10) || 27017,
