@@ -29,15 +29,11 @@ import { Factories } from './domain/factories';
     RabbitMQModule.forRoot(RabbitMQModule, {
       exchanges: [
         {
-          name: 'demostracion',
-          type: 'fanout',
-        },
-        {
-          name: 'booking-service',
+          name: 'property-service:property-created',
           type: 'fanout',
         },
       ],
-      uri: 'amqp://3.135.210.254:5672',
+      uri: 'amqp://3.131.89.227:5672',
       connectionInitOptions: { wait: true, reject: true, timeout: 3000 },
     }),
   ],

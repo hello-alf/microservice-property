@@ -8,6 +8,7 @@ import {
   UploadedFiles,
   Query,
 } from '@nestjs/common';
+import { AnyFilesInterceptor } from '@nestjs/platform-express';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiTags } from '@nestjs/swagger';
 import { CreatePropertyDto } from '../../application/dtos/property.dto';
@@ -15,7 +16,6 @@ import { CreatePropertyCommand } from '../../application/commands/impl/create-pr
 import { UploadPhotoCommand } from '../../application/commands/impl/upload-property.command';
 import { GetPropertiesQuery } from '../../application/queries/impl/get-properties.query';
 import { GetPropertyQuery } from '../../application/queries/impl/get-property.query';
-import { AnyFilesInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('property')
 @Controller('property')

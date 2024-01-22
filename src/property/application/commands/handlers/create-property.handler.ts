@@ -1,5 +1,6 @@
 import { CommandHandler, ICommandHandler, EventPublisher } from '@nestjs/cqrs';
 import { BadRequestException } from '@nestjs/common';
+import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
 
 import { CreatePropertyCommand } from '../impl/create-property.command';
 import { PropertyRepository } from '../../../infrastructure/mongoose/repositories/property.repository';
@@ -14,13 +15,12 @@ export class CreatePropertyHandler
     private readonly propertyRepository: PropertyRepository,
     private readonly publisher: EventPublisher,
     private readonly propertyFactory: PropertyFactory,
+    private readonly amqpConnection: AmqpConnection,
   ) {}
 
   async execute(command: CreatePropertyCommand) {
     try {
       const { createPropertyRequest } = command;
-
-      console.log('createPropertyRequest', createPropertyRequest);
 
       const customAddress = new Address(
         createPropertyRequest.address.street,
@@ -50,6 +50,12 @@ export class CreatePropertyHandler
       );
 
       property.commit();
+
+      await this.amqpConnection.publish(
+        'property-service:property-created',
+        '',
+        property,
+      );
 
       return property;
     } catch (error) {
