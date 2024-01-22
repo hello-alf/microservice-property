@@ -21,6 +21,15 @@ export class PropertyRepository implements iPropertyRepository {
   ) {}
 
   save = (property: Property, host: Host): Property => {
+    const newHost = new this.hostModel({
+      _id: new ObjectId(host.getId()),
+      name: host.getName(),
+      lastname: host.getLastname(),
+      city: host.getCity(),
+      country: host.getCountry(),
+      email: host.getEmail(),
+    });
+
     const newProperty = new this.propertyModel({
       _id: new ObjectId(),
       name: property.getName(),
@@ -40,18 +49,10 @@ export class PropertyRepository implements iPropertyRepository {
       beds: property.getBeds().getValue(),
       bathrooms: property.getBathrooms(),
       pricePerNight: property.getPricePerNight().getValue(),
+      host: newHost,
     });
 
     newProperty.save();
-
-    const newHost = new this.hostModel({
-      _id: new ObjectId(host.getId()),
-      name: host.getName(),
-      lastname: host.getLastname(),
-      city: host.getCity(),
-      country: host.getCountry(),
-      email: host.getEmail(),
-    });
 
     return this.propertyMapper.mapToDomain(newProperty, newHost);
   };
@@ -79,7 +80,7 @@ export class PropertyRepository implements iPropertyRepository {
 
   findById = (id: string): Promise<PropertyModelSchema> => {
     const objectId = new ObjectId(id);
-    return this.propertyModel.findById(objectId).exec();
+    return this.propertyModel.findById(objectId).populate('host').exec();
   };
 
   findAll = (criteria?: any): Promise<PropertyModelSchema[]> => {
@@ -99,6 +100,7 @@ export class PropertyRepository implements iPropertyRepository {
 
     return this.propertyModel
       .find(filter)
+      .populate('host')
       .select({
         _id: 1,
         name: 1,

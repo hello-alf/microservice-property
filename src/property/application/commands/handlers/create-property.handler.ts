@@ -58,11 +58,20 @@ export class CreatePropertyHandler
 
       property.commit();
 
-      // await this.amqpConnection.publish(
-      //   'property-service:property-created',
-      //   '',
-      //   property,
-      // );
+      const brokerPayload = {
+        id: property.getId(),
+        name: property.getName(),
+        description: property.getDescription(),
+        address: property.getAddress(),
+        propertyType: property.getPropertyType(),
+        pricePerNight: property.getPricePerNight(),
+      };
+
+      await this.amqpConnection.publish(
+        'property-service:property-created',
+        '',
+        brokerPayload,
+      );
 
       return property;
     } catch (error) {
