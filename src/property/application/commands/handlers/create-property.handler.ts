@@ -1,5 +1,5 @@
 import { CommandHandler, ICommandHandler, EventPublisher } from '@nestjs/cqrs';
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
 
 import { CreatePropertyCommand } from '../impl/create-property.command';
@@ -33,9 +33,12 @@ export class CreatePropertyHandler
         createPropertyRequest.address.longitude,
       );
 
-      const actualHost = await this.hostRepository.findById(
+      const host = await this.hostRepository.findById(
         createPropertyRequest.host,
       );
+
+      if (!host)
+        throw new NotFoundException('No se encontro el host con el id dado');
 
       const propertyObject = this.propertyFactory.createProperty(
         '',
@@ -49,11 +52,11 @@ export class CreatePropertyHandler
         createPropertyRequest.beds,
         createPropertyRequest.bathrooms,
         createPropertyRequest.pricePerNight,
-        actualHost,
+        host,
       );
 
       const property = this.publisher.mergeObjectContext(
-        this.propertyRepository.save(propertyObject, actualHost),
+        this.propertyRepository.save(propertyObject, host),
       );
 
       property.commit();
