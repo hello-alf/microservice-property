@@ -1,15 +1,15 @@
 enum AmenityEnum {
   WIFI = 'wifi',
-  PARKING = 'parking',
-  POOL = 'pool',
-  HEATING = 'heating',
-  KITCHEN = 'kitchen',
-  WASHER = 'washer',
-  DRYER = 'dryer',
+  PARKING = 'parqueo',
+  POOL = 'psicina',
+  HEATING = 'calefacción',
+  KITCHEN = 'cocina',
+  WASHER = 'lavadora',
+  DRYER = 'secadora',
   CABLE = 'cable',
   TV = 'tv',
-  IRON = 'iron',
-  HANGERS = 'hangers',
+  IRON = 'plancha para ropa',
+  HANGERS = 'colgadores',
 }
 
 export default AmenityEnum;
