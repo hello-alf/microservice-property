@@ -45,7 +45,7 @@ import { HostService } from './api/host-event/host.service';
           type: 'fanout',
         },
       ],
-      uri: 'amqp://3.131.89.227:5672',
+      uri: process.env.RABBITMQ_URI,
       connectionInitOptions: { wait: true, reject: true, timeout: 3000 },
     }),
   ],
