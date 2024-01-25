@@ -1,5 +1,5 @@
 import { CommandHandler, ICommandHandler, EventPublisher } from '@nestjs/cqrs';
-import { BadRequestException, NotFoundException } from '@nestjs/common';
+import { BadRequestException } from '@nestjs/common';
 import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
 
 import { CreatePropertyCommand } from '../impl/create-property.command';
@@ -37,9 +37,6 @@ export class CreatePropertyHandler
         createPropertyRequest.host,
       );
 
-      if (!host)
-        throw new NotFoundException('No se encontro el host con el id dado');
-
       const propertyObject = this.propertyFactory.createProperty(
         '',
         createPropertyRequest.name,
@@ -61,24 +58,29 @@ export class CreatePropertyHandler
 
       property.commit();
 
-      const brokerPayload = {
-        id: property.getId(),
-        name: property.getName(),
-        description: property.getDescription(),
-        address: property.getAddress(),
-        propertyType: property.getPropertyType(),
-        pricePerNight: property.getPricePerNight(),
-      };
-
-      await this.amqpConnection.publish(
-        'property-service:property-created',
-        '',
-        brokerPayload,
-      );
+      this.publishEvent(property);
 
       return property;
     } catch (error) {
       throw new BadRequestException(error.message);
     }
   }
+
+  private publishEvent = async (property: any) => {
+    const eventPayload = {
+      id: property.getId(),
+      name: property.getName(),
+      description: property.getDescription(),
+      address: property.getAddress(),
+      propertyType: property.getPropertyType(),
+      pricePerNight: property.getPricePerNight(),
+      host: property.getHost().getId(),
+    };
+
+    await this.amqpConnection.publish(
+      'property-service:property-created',
+      '',
+      eventPayload,
+    );
+  };
 }

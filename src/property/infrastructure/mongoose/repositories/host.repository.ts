@@ -32,9 +32,13 @@ export class HostRepository implements iHostRepository {
   };
 
   findById = async (id: string): Promise<Host> => {
-    const objectId = new ObjectId(id);
-    const actualHost = await this.hostModel.findById(objectId).exec();
+    try {
+      const objectId = new ObjectId(id);
+      const actualHost = await this.hostModel.findById(objectId).exec();
 
-    return this.hostMapper.mapToDomain(actualHost);
+      return this.hostMapper.mapToDomain(actualHost);
+    } catch (error) {
+      throw new Error('No se encontró el host con id: ' + id);
+    }
   };
 }
