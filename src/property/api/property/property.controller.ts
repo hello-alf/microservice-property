@@ -16,6 +16,7 @@ import { CreatePropertyCommand } from '../../application/commands/impl/create-pr
 import { UploadPhotoCommand } from '../../application/commands/impl/upload-property.command';
 import { GetPropertiesQuery } from '../../application/queries/impl/get-properties.query';
 import { GetPropertyQuery } from '../../application/queries/impl/get-property.query';
+import { GetSelectedPropertiesQuery } from '../../application/queries/impl/get-selected-properties.query';
 
 @ApiTags('property')
 @Controller('property')
@@ -42,6 +43,15 @@ export class PropertyController {
     @Param('id') id: string,
   ) {
     return this.commandBus.execute(new UploadPhotoCommand(files, id));
+  }
+
+  @Get('/many')
+  findMany(@Query() query): Promise<GetPropertyQuery> {
+    const propertiesIdsArray = query.filter.split(',');
+    console.log('propertiesIdsArray', propertiesIdsArray);
+    return this.queryBus.execute(
+      new GetSelectedPropertiesQuery(propertiesIdsArray),
+    );
   }
 
   @Get('/:id')
