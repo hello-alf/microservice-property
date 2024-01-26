@@ -130,4 +130,14 @@ export class PropertyRepository implements iPropertyRepository {
 
     return this.propertyMapper.mapToDomain(property, host);
   };
+
+  findAllSelected = async (params: string[]) => {
+    const formattedParams = params.map((param) => new ObjectId(param));
+
+    const results = this.propertyModel
+      .find({ _id: { $in: formattedParams } })
+      .exec();
+
+    return results;
+  };
 }
