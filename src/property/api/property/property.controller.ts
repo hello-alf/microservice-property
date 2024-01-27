@@ -48,7 +48,7 @@ export class PropertyController {
   @Get('/many')
   findMany(@Query() query): Promise<GetPropertyQuery> {
     const propertiesIdsArray = query.filter.split(',');
-    console.log('propertiesIdsArray', propertiesIdsArray);
+
     return this.queryBus.execute(
       new GetSelectedPropertiesQuery(propertiesIdsArray),
     );

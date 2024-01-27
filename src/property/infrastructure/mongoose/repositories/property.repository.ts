@@ -118,9 +118,6 @@ export class PropertyRepository implements iPropertyRepository {
   findOneAndUpdate = async (id: string, payload: any): Promise<Property> => {
     const objectId = new ObjectId(id);
 
-    console.log('objectId', objectId);
-    console.log('payload', payload);
-
     const property = await this.propertyModel
       .findOneAndUpdate({ _id: objectId }, { $set: payload }, { new: true })
       .exec();
@@ -136,6 +133,7 @@ export class PropertyRepository implements iPropertyRepository {
 
     const results = this.propertyModel
       .find({ _id: { $in: formattedParams } })
+      .populate('host')
       .exec();
 
     return results;
